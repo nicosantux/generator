@@ -25,8 +25,4 @@ module.exports = class extends Generator {
       this.destinationPath(".eslintrc.js")
     );
   }
-
-  env() {
-    this.fs.copy(this.templatePath(".env"), this.destinationPath(".env"));
-  }
 };
