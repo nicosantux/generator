@@ -72,6 +72,6 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "nicosantux/generator-santux",
+  "repository": "nicosantux/generator",
   "license": "MIT"
 }
