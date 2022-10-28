@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 
     Type yo santux:<option> to start. For example: yo santux:next-ts
 
-    Options: next-ts, react-ts, react, vscode
+    Options: next-ts, react-ts, react, node-ts, vscode
     ==================================================================`);
   }
 };
