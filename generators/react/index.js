@@ -1,9 +1,22 @@
 const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
+  async prompting() {
+    this.answer = await this.prompt([
+      {
+        type: "list",
+        name: "packageManager",
+        message: "Which package manager does your project use?",
+        choices: ["npm", "pnpm", "yarn"]
+      }
+    ])
+  }
+
   installDependencies() {
-    this.npmInstall(
+    this.spawnCommandSync(this.answer.packageManager,
       [
+        this.answer.packageManager === "npm" ? "install" : "add",
+        "-D",
         "eslint-config-prettier",
         "eslint-config-standard",
         "eslint-plugin-import",
@@ -14,8 +27,7 @@ module.exports = class extends Generator {
         "eslint-plugin-react",
         "eslint",
         "prettier"
-      ],
-      { "save-dev": true }
+      ]
     );
   }
 
