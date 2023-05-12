@@ -32,16 +32,17 @@ module.exports = class extends Generator {
         "-D",
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
+        "eslint",
         "eslint-config-next",
         "eslint-config-prettier",
         "eslint-plugin-import",
         "eslint-plugin-node",
         "eslint-plugin-prettier",
         "eslint-plugin-promise",
-        "eslint-plugin-react-hooks",
         "eslint-plugin-react",
-        "eslint",
-        "prettier"
+        "eslint-plugin-react-hooks",
+        "prettier",
+        this.answer.tailwind ? "eslint-plugin-tailwindcss" : ""
       ]
     );
   }
@@ -64,8 +65,7 @@ module.exports = class extends Generator {
 
   scripts() {
     if(this.answer.addScripts) {
-      const packageJsonPath = this.destinationRoot().join("/package.json")
-      const packageJson = fs.readFileSync(packageJsonPath, "utf-8")
+      const packageJson = fs.readFileSync(this.destinationPath("package.json"), "utf-8")
       const packageJsonParse = JSON.parse(packageJson)
 
       packageJsonParse.scripts.lint = "eslint ./src"
