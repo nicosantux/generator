@@ -1,7 +1,7 @@
 {
   "env": {
-    "browser": false,
-    "es2021": true,
+    "browser": true,
+    "es2022": true,
     "node": true
   },
   "extends": [
@@ -15,7 +15,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "settings": {
@@ -52,16 +52,7 @@
     "import/order": [
       "warn",
       {
-        "groups": [
-          "type",
-          "builtin",
-          "object",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
+        "groups": ["type", "builtin", "object", "external", "internal", "parent", "sibling", "index"],
         "pathGroups": [
           {
             "pattern": "~/**",

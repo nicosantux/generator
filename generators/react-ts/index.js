@@ -20,7 +20,6 @@ module.exports = class extends Generator {
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
         "eslint-config-prettier",
-        "eslint-config-standard",
         "eslint-plugin-import",
         "eslint-plugin-node",
         "eslint-plugin-prettier",
@@ -37,6 +36,20 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(".eslintrc.json"),
       this.destinationPath(".eslintrc.json")
+    );
+  }
+
+  eslintIgnore() {
+    this.fs.copy(
+      this.templatePath(".eslintignore"),
+      this.destinationPath(".eslintignore")
+    );
+  }
+
+  editorconfig() {
+    this.fs.copy(
+      this.templatePath(".editorconfig"),
+      this.destinationPath(".editorconfig")
     );
   }
 };
