@@ -65,13 +65,14 @@ module.exports = class extends Generator {
 
   scripts() {
     if(this.answer.addScripts) {
-      const packageJson = fs.readFileSync(this.destinationPath("package.json"), "utf-8")
-      const packageJsonParse = JSON.parse(packageJson)
+      const pkgJson = {
+        scripts: {
+          lint: "eslint .",
+          ["lint:fix"]: "eslint . --fix"
+        }
+      }
 
-      packageJsonParse.scripts.lint = "eslint ./src"
-      packageJsonParse.scripts["lint:fix"] = "eslint ./src --fix"
-
-      this.destinationPath(fs.writeFileSync("package.json", JSON.stringify(packageJsonParse, null, 2)))
+      this.fs.extendJSON(this.destinationPath("package.json"), pkgJson)
     }
   }
 
