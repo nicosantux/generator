@@ -4,32 +4,32 @@ module.exports = class extends Generator {
   async prompting() {
     this.answer = await this.prompt([
       {
-        type: "list",
-        name: "packageManager",
+        choices: ["npm", "pnpm", "yarn"],
         message: "Which package manager does your project use?",
-        choices: ["npm", "pnpm", "yarn"]
+        name: "packageManager",
+        type: "list"
       },
       {
-        type: "confirm",
-        name: "addScripts",
+        default: true,
         message: "Would you like to add lint scripts?",
-        default: true
+        name: "addScripts",
+        type: "confirm"
       },
       {
-        type: "confirm",
-        name: "tailwind",
+        default: true,
         message: "Does your project use Tailwindcss?",
-        default: true
+        name: "tailwind",
+        type: "confirm"
       }
     ])
   }
 
   configuring() {
-    if(this.answer.addScripts) {
+    if (this.answer.addScripts) {
       const pkgJson = {
         scripts: {
           lint: "eslint .",
-          ["lint:fix"]: "eslint . --fix"
+          ["lint:fix"]: "eslint . --fix --ext .js,.jsx,.ts,.tsx,.cjs,.mjs"
         }
       }
 
