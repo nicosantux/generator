@@ -41,7 +41,7 @@ module.exports = class extends Generator {
 
       eslintConfig.extends.push("plugin:tailwindcss/recommended")
 
-      this.destinationPath(this.fs.writeJSON(this.destinationPath(".eslintrc.json"), eslintConfig))
+      this.fs.writeJSON(this.destinationPath(".eslintrc.json"), eslintConfig)
     } else {
      this.fs.copy(
         this.templatePath(".eslintrc.json"),
