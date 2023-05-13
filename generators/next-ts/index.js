@@ -66,8 +66,8 @@ module.exports = class extends Generator {
     );
   }
 
-   installDependencies() {
-    this.spawnCommandSync(this.answer.packageManager,
+  installDependencies() {
+    this.spawnCommand(this.answer.packageManager,
       [
         this.answer.packageManager === "npm" ? "install" : "add",
         "-D",
