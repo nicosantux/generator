@@ -2,7 +2,7 @@
   "name": "generator-santux",
   "version": "1.4.1",
   "description": "Santux Generator",
-  "homepage": "",
+  "homepage": "https://github.com/nicosantux/generator",
   "author": {
     "name": "Nicolás Santuccio",
     "email": "nico.santuccio@gmail.com"
