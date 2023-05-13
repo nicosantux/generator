@@ -1,5 +1,4 @@
 const Generator = require("yeoman-generator");
-const fs = require("fs")
 
 module.exports = class extends Generator {
   async prompting() {
@@ -49,12 +48,11 @@ module.exports = class extends Generator {
 
   eslint() {
     if (this.answer.tailwind) {
-      const eslintConfig = fs.readFileSync(this.templatePath(".eslintrc.json"), "utf-8")
-      const eslintConfigParsed = JSON.parse(eslintConfig)
+      const eslintConfig = this.fs.readJSON(this.templatePath(".eslintrc.json"))
 
-      eslintConfigParsed.extends.push("plugin:tailwindcss/recommended")
+      eslintConfig.extends.push("plugin:tailwindcss/recommended")
 
-      this.destinationPath(fs.writeFileSync(".eslintrc.json", JSON.stringify(eslintConfigParsed, null, 2)))
+      this.destinationPath(this.fs.writeJSON(this.destinationPath(".eslintrc.json"), eslintConfig))
     } else {
       this.fs.copy(
         this.templatePath(".eslintrc.json"),
