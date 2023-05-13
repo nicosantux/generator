@@ -14,7 +14,7 @@ module.exports = class extends Generator {
 
   configuring() {
     if (this.answer.tailwind) {
-      const extensions = this.fs.readJSON(this.templatePath(".extensions.json"))
+      const extensions = this.fs.readJSON(this.templatePath(".vscode/.extensions.json"))
 
       extensions.recommendations.push("bradlc.vscode-tailwindcss")
 
