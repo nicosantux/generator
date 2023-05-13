@@ -24,28 +24,6 @@ module.exports = class extends Generator {
     ])
   }
 
-   installDependencies() {
-    this.spawnCommandSync(this.answer.packageManager,
-      [
-        this.answer.packageManager === "npm" ? "install" : "add",
-        "-D",
-        "@typescript-eslint/eslint-plugin",
-        "@typescript-eslint/parser",
-        "eslint",
-        "eslint-config-next",
-        "eslint-config-prettier",
-        "eslint-plugin-import",
-        "eslint-plugin-node",
-        "eslint-plugin-prettier",
-        "eslint-plugin-promise",
-        "eslint-plugin-react",
-        "eslint-plugin-react-hooks",
-        "prettier",
-        this.answer.tailwind ? "eslint-plugin-tailwindcss" : ""
-      ]
-    );
-  }
-
   eslint() {
     if (this.answer.tailwind) {
       const eslintConfig = this.fs.readJSON(this.templatePath(".eslintrc.json"))
@@ -85,6 +63,28 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath(".editorconfig"),
       this.destinationPath(".editorconfig")
+    );
+  }
+
+   installDependencies() {
+    this.spawnCommandSync(this.answer.packageManager,
+      [
+        this.answer.packageManager === "npm" ? "install" : "add",
+        "-D",
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint",
+        "eslint-config-next",
+        "eslint-config-prettier",
+        "eslint-plugin-import",
+        "eslint-plugin-node",
+        "eslint-plugin-prettier",
+        "eslint-plugin-promise",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks",
+        "prettier",
+        this.answer.tailwind ? "eslint-plugin-tailwindcss" : ""
+      ]
     );
   }
 };
