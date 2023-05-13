@@ -14,12 +14,12 @@ module.exports = class extends Generator {
 
   configuring() {
     if (this.answer.tailwind) {
-      const extensions = this.fs.readJSON(this.templatePath(".vscode/.extensions.json"))
+      const extensions = this.fs.readJSON(this.templatePath(".vscode/extensions.json"))
 
       extensions.recommendations.push("bradlc.vscode-tailwindcss")
 
-      this.fs.writeJSON(this.destinationPath(".vscode/.extensions.json"), extensions)
-      this.fs.copy(this.templatePath(".vscode/extensions"), this.destinationPath(".vscode/extensions"));
+      this.fs.writeJSON(this.destinationPath(".vscode/extensions.json"), extensions)
+      this.fs.copy(this.templatePath(".vscode/settings.json"), this.destinationPath(".vscode/settings.json"));
     } else {
       this.fs.copy(this.templatePath(".vscode"), this.destinationPath(".vscode"));
     }
