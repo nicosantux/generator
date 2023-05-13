@@ -24,22 +24,7 @@ module.exports = class extends Generator {
     ])
   }
 
-  eslint() {
-    if (this.answer.tailwind) {
-      const eslintConfig = this.fs.readJSON(this.templatePath(".eslintrc.json"))
-
-      eslintConfig.extends.push("plugin:tailwindcss/recommended")
-
-      this.destinationPath(this.fs.writeJSON(this.destinationPath(".eslintrc.json"), eslintConfig))
-    } else {
-      this.fs.copy(
-        this.templatePath(".eslintrc.json"),
-        this.destinationPath(".eslintrc.json")
-      );
-    }
-  }
-
-  scripts() {
+  configuring() {
     if(this.answer.addScripts) {
       const pkgJson = {
         scripts: {
@@ -50,24 +35,33 @@ module.exports = class extends Generator {
 
       this.fs.extendJSON(this.destinationPath("package.json"), pkgJson)
     }
-  }
 
-  eslintIgnore() {
+    if (this.answer.tailwind) {
+      const eslintConfig = this.fs.readJSON(this.templatePath(".eslintrc.json"))
+
+      eslintConfig.extends.push("plugin:tailwindcss/recommended")
+
+      this.destinationPath(this.fs.writeJSON(this.destinationPath(".eslintrc.json"), eslintConfig))
+    } else {
+     this.fs.copy(
+        this.templatePath(".eslintrc.json"),
+        this.destinationPath(".eslintrc.json")
+      );
+    }
+
     this.fs.copy(
       this.templatePath(".eslintignore"),
       this.destinationPath(".eslintignore")
     );
-  }
 
-  editorconfig() {
     this.fs.copy(
       this.templatePath(".editorconfig"),
       this.destinationPath(".editorconfig")
     );
   }
 
-  installDependencies() {
-    this.spawnCommand(this.answer.packageManager,
+  install() {
+    this.spawnCommandSync(this.answer.packageManager,
       [
         this.answer.packageManager === "npm" ? "install" : "add",
         "-D",
