@@ -7,15 +7,15 @@ module.exports = class extends Generator {
         choices: ["npm", "pnpm", "yarn"],
         message: "Which package manager does your project use?",
         name: "packageManager",
-        type: "list"
+        type: "list",
       },
       {
         default: true,
         message: "Would you like to add lint scripts?",
         name: "addScripts",
-        type: "confirm"
-      }
-    ])
+        type: "confirm",
+      },
+    ]);
   }
 
   configuring() {
@@ -23,11 +23,12 @@ module.exports = class extends Generator {
       const pkgJson = {
         scripts: {
           lint: "eslint .",
-          ["lint:fix"]: "eslint . --fix --ext .js,.jsx,.ts,.tsx,.cjs,.mjs"
-        }
-      }
+          ["lint:fix"]: "eslint . --fix --ext .js,.jsx,.ts,.tsx,.cjs,.mjs",
+          format: "prettier --write .",
+        },
+      };
 
-      this.fs.extendJSON(this.destinationPath("package.json"), pkgJson)
+      this.fs.extendJSON(this.destinationPath("package.json"), pkgJson);
     }
 
     this.fs.copy(
@@ -44,25 +45,30 @@ module.exports = class extends Generator {
       this.templatePath(".editorconfig"),
       this.destinationPath(".editorconfig")
     );
+
+    this.fs.copy(
+      this.templatePath(".prettierrc"),
+      this.destinationPath(".prettierrc")
+    );
+
+    this.fs.copy(
+      this.templatePath(".prettierignore"),
+      this.destinationPath(".prettierignore")
+    );
   }
 
   install() {
-    this.spawnCommandSync(this.answer.packageManager,
-      [
-        this.answer.packageManager === "npm" ? "install" : "add",
-        "-D",
-        "@typescript-eslint/eslint-plugin",
-        "@typescript-eslint/parser",
-        "eslint",
-        "eslint-config-prettier",
-        "eslint-plugin-import",
-        "eslint-plugin-node",
-        "eslint-plugin-prettier",
-        "eslint-plugin-promise",
-        "prettier"
-      ]
-    );
+    this.spawnCommandSync(this.answer.packageManager, [
+      this.answer.packageManager === "npm" ? "install" : "add",
+      "-D -E",
+      "@typescript-eslint/eslint-plugin",
+      "@typescript-eslint/parser",
+      "eslint",
+      "eslint-config-prettier",
+      "eslint-plugin-import",
+      "eslint-plugin-node",
+      "eslint-plugin-promise",
+      "prettier",
+    ]);
   }
 };
-
-
