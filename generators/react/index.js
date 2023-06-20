@@ -76,7 +76,8 @@ module.exports = class extends Generator {
   install() {
     this.spawnCommandSync(this.answer.packageManager, [
       this.answer.packageManager === "npm" ? "install" : "add",
-      "-D -E",
+      "-D",
+      "-E",
       "eslint",
       "eslint-config-prettier",
       "eslint-plugin-import",

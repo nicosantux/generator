@@ -60,7 +60,8 @@ module.exports = class extends Generator {
   install() {
     this.spawnCommandSync(this.answer.packageManager, [
       this.answer.packageManager === "npm" ? "install" : "add",
-      "-D -E",
+      "-D",
+      "-E",
       "@typescript-eslint/eslint-plugin",
       "@typescript-eslint/parser",
       "eslint",
