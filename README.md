@@ -1,9 +1,21 @@
 # Santux Generator
 
-### Generator options:
+## Usage
 
-* yo santux:next-ts
-* yo santux:react-ts
-* yo santux:react
-* yo santux:node-ts
-* yo santux:vscode
+You need to install yeoman globally.
+
+```bash
+npm install -g yo
+```
+
+Then install the generator globally.
+
+```bash
+npm install -g generator-santux
+```
+
+Now you can run
+
+```bash
+yo santux
+```
