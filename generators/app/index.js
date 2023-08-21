@@ -20,7 +20,7 @@ module.exports = class extends Generator {
     ]);
   }
 
-  install() {
-    this.spawnCommandSync(`yo santux:${this.answer.generator}`);
+  configuring() {
+    this.composeWith(require.resolve(`../${this.answer.generator}`));
   }
 };
