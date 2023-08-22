@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   publish:
+    name: 🚀 Publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     
@@ -21,6 +22,6 @@ jobs:
         run: npm ci
 
       - name: 🚀 Publish to npm
-      - uses: JS-DevTools/npm-publish@v2.2.1
+        uses: JS-DevTools/npm-publish@v2.2.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
