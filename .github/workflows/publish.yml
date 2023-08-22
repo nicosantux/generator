@@ -7,6 +7,7 @@ jobs:
     name: 🚀 Publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    
     steps:
       - name: 🎯 Checkout
         uses: actions/checkout@v3.5.3
@@ -18,7 +19,7 @@ jobs:
           cache: 'npm'
       
       - name: 📥 Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: 🚀 Publish to npm
       - uses: JS-DevTools/npm-publish@v2.2.1
