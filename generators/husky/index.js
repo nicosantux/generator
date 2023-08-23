@@ -1,7 +1,5 @@
-const { exec } = require('node:child_process')
-const { promisify } = require('node:util')
+const fs = require('node:fs/promises')
 
-const execAsync = promisify(exec)
 const Generator = require('yeoman-generator')
 
 module.exports = class extends Generator {
@@ -36,10 +34,6 @@ module.exports = class extends Generator {
       this.spawnCommandSync('npx', ['husky', 'install'])
     }
 
-    await execAsync(
-      `npx husky add .husky/commit-msg '${this.answer.packageManager} run commitlint \${1}'`,
-    )
-
     const pkgJson = {
       scripts: {
         commitlint: 'commitlint --edit',
@@ -56,5 +50,15 @@ module.exports = class extends Generator {
       this.templatePath('commitlint.config.cjs'),
       this.destinationPath('commitlint.config.cjs'),
     )
+
+    const file = await fs.readFile(this.templatePath('commit-msg'), 'utf-8')
+
+    const fileParts = file.split('\n')
+
+    const commandIndex = fileParts.findIndex((str) => str.startsWith('run'))
+
+    fileParts[commandIndex] = `${this.answer.packageManager} ${fileParts.at(commandIndex)}`
+
+    this.fs.write(this.destinationPath('.husky/commit-msg'), fileParts.join('\n'))
   }
 }
