@@ -1,13 +1,9 @@
 {
   "env": {
-    "es2022": true,
+    "es2023": true,
     "node": true
   },
-  "extends": [
-    "eslint-config-prettier",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "plugins": ["import", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

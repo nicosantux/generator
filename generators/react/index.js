@@ -30,7 +30,8 @@ module.exports = class extends Generator {
         scripts: {
           lint: 'eslint .',
           ['lint:fix']: 'eslint . --fix --ext .js,.jsx,.ts,.tsx,.cjs,.mjs',
-          format: 'prettier --write .',
+          format: 'prettier . --check',
+          ['format:fix']: 'prettier . --write',
         },
       }
 
@@ -64,8 +65,6 @@ module.exports = class extends Generator {
       'eslint',
       'eslint-config-prettier',
       'eslint-plugin-import',
-      'eslint-plugin-node',
-      'eslint-plugin-promise',
       'eslint-plugin-react',
       'eslint-plugin-react-hooks',
       'prettier',
